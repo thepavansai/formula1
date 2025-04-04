@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven '.maven'
+        git 'Git'
     }
     environment {
         MAVEN_HOME = tool '.maven'
@@ -9,22 +10,22 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/thepavansai/formula1'
+                git branch: 'main', url: 'https://github.com/thepavansai/formula1', credentialsId: '09a9b2bd-e5bc-4934-992f-d4dbdd123867', tool: 'Git'
             }
         }
         stage('Maven Clean') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn clean"
+                bat "\"${MAVEN_HOME}/bin/mvn\" clean"
             }
         }
         stage('Build') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn install"
+                bat "\"${MAVEN_HOME}/bin/mvn\" install"
             }
         }
         stage('Test') {
             steps {
-                sh "${MAVEN_HOME}/bin/mvn test"
+                bat "\"${MAVEN_HOME}/bin/mvn\" test"
             }
         }
         stage('Scan') {
