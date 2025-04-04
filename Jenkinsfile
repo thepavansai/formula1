@@ -2,46 +2,40 @@ pipeline {
     agent any
     tools {
         maven '.maven'
-        git 'Git'
-    }
-    environment {
-        MAVEN_HOME = tool '.maven'
     }
     stages {
-        stage('Checkout') {
+        stage('Maven clean') {
             steps {
-                git branch: 'main', url: 'https://github.com/thepavansai/formula1', credentialsId: '09a9b2bd-e5bc-4934-992f-d4dbdd123867', tool: 'Git'
+
+                    sh 'mvn clean'
+                }
             }
-        }
-        stage('Maven Clean') {
+
+         stage('Build') {
             steps {
-                bat "\"${MAVEN_HOME}/bin/mvn\" clean"
-            }
-        }
-        stage('Build') {
-            steps {
-                bat "\"${MAVEN_HOME}/bin/mvn\" install"
+                echo 'Build stage'
             }
         }
         stage('Test') {
             steps {
-                bat "\"${MAVEN_HOME}/bin/mvn\" test"
+                echo 'Test'
             }
         }
         stage('Scan') {
             steps {
-                echo "Skipping scan stage"
+                echo 'Scan'
             }
         }
         stage('Deploy') {
             steps {
-                echo "Skipping deploy stage"
+                echo 'Deploy'
             }
         }
-        stage('Monitor') {
+         stage('Monitor') {
             steps {
-                echo "Skipping monitor stage"
+                echo 'Monitor'
             }
+        }
+
         }
     }
-}
