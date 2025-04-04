@@ -4,20 +4,14 @@ pipeline {
         maven '.maven'
     }
     stages {
-        stage('Maven clean') {
+        stage('Maven Clean') {
             steps {
-            {
-                dir('formula1')
-                {
-                dir('formula1')
-                {
-                sh 'mvn clean'
-                }
+                dir('formula1') {
+                    sh 'mvn clean'
                 }
             }
-            }
-
-         stage('Build') {
+        }
+        stage('Build') {
             steps {
                 echo 'Build stage'
             }
@@ -37,11 +31,10 @@ pipeline {
                 echo 'Deploy'
             }
         }
-         stage('Monitor') {
+        stage('Monitor') {
             steps {
                 echo 'Monitor'
             }
         }
-
-        }
     }
+}
