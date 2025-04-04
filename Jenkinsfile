@@ -4,7 +4,7 @@ pipeline {
         maven '.maven'
     }
     environment {
-        MAVEN_HOME = tool 'Maven 3.9.6'
+        MAVEN_HOME = tool '.maven'
     }
     stages {
         stage('Checkout') {
