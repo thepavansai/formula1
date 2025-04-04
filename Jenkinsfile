@@ -1,39 +1,45 @@
 pipeline {
     agent any
     tools {
-        maven '.maven'
+        maven 'Maven 3.9.6'
+    }
+    environment {
+        MAVEN_HOME = tool 'Maven 3.9.6'
     }
     stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/thepavansai/formula1'
+            }
+        }
         stage('Maven Clean') {
             steps {
-                dir('formula1') {
-                    sh 'mvn clean'
-                }
+                sh "${MAVEN_HOME}/bin/mvn clean"
             }
         }
         stage('Build') {
             steps {
-                echo 'Build stage'
+                sh "${MAVEN_HOME}/bin/mvn install"
             }
         }
         stage('Test') {
             steps {
-                echo 'Test'
+                sh "${MAVEN_HOME}/bin/mvn test"
             }
         }
         stage('Scan') {
             steps {
-                echo 'Scan'
+                echo "Skipping scan stage"
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploy'
+                echo "Skipping deploy stage"
             }
         }
         stage('Monitor') {
             steps {
-                echo 'Monitor'
+                echo "Skipping monitor stage"
             }
         }
     }
