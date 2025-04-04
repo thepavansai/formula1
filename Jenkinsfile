@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven 3.9.6'
+        maven '.maven'
     }
     environment {
         MAVEN_HOME = tool 'Maven 3.9.6'
