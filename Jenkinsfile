@@ -6,8 +6,12 @@ pipeline {
     stages {
         stage('Maven clean') {
             steps {
+                   { dir('formula1')
 
-                    sh 'mvn clean'
+                    dir('formula1')}
+                    {
+                    sh 'mvn clean'}
+
                 }
             }
 
